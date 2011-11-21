@@ -54,6 +54,19 @@ error_val   = zeros(m, 1);
 %
 
 % ---------------------- Sample Solution ----------------------
+for i = 1:m,
+  Xi = X(1:i, :);
+  Yi = y(1:i);
+  % for iter subset of X, y compute the theta
+  % tricky, should explictly using lambda=1 for training
+  theta = trainLinearReg(Xi, Yi, 1); 
+  Ji = linearRegCostFunction(Xi, Yi, theta, 0);
+  error_train(i) = Ji;
+  % using the trained theta for validate entire Xval,yval
+  Jv = linearRegCostFunction(Xval, yval, theta, 0); 
+  error_val(i) = Jv;
+end
+  
 
 
 
